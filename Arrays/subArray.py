@@ -24,15 +24,18 @@ is 15.
 '''
 
 def subarray(arr,n,s):
-    for i in range(0,n):
-        su=0
-        for j in range(i,n):
-            su+=arr[j]
-            if su==s:
-                return i+1,j+1
-            elif su>s:
-                break
-    return -1
+    su,l,r=arr[0],0,1
+    if su==s:
+        return [1,1]
+    while r<n:
+        su+=arr[r]
+        while su>s and l<r:
+            su-=arr[l]
+            l+=1
+        if su==s:
+            return [l+1, r+1]
+        r+=1
+    return [-1]
 
 arr =[1,2,3,7,6]
 n=5
